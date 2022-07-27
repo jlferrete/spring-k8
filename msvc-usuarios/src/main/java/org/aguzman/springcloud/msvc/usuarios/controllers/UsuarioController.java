@@ -48,4 +48,13 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        Optional<Usuario> usuarioOptional = service.porId(id);
+        if (usuarioOptional.isPresent()) {
+            service.eliminar(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
